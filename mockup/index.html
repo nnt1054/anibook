@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta id="Viewport" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <title>Neil N. Toledo</title>
+        <link rel="stylesheet" type="text/css" href="main.css">
+    </head>
+
+    <body>
+
+        <div class='app'>
+            <div class='side-nav'>
+                <div class='nav-logo-container'>
+                    <img class='nav-logo-image' src='me.jpg'>
+                </div>
+                <!-- search textbox -->
+                <input id="search-textbox" type="text" name="location" placeholder="Search..." value="">
+                <!-- starred list button -->
+                <button id="your-list-btn" class="nav-btn"> Your List </button>
+                <!-- by season button -->
+                <button id="your-list-btn" class="nav-btn"> By Season </button>
+                <!-- popular button -->
+                <button id="your-list-btn" class="nav-btn"> Popular </button>
+
+
+                <!-- divider line -->
+                <div class="row"><span> Genres </span> <button onclick='toggleGenreList()'>v</button></div>
+                <!-- genres list -->
+                <div id='genre-container' class="column">
+                    <div>
+                      <button class='genre-btn' id='Action-btn' for='Action-cb' onclick="toggleGenre(this)">Action</button>
+                      <input type='checkbox' id='Action-cb' name='Action-cb' btn='Action-btn' onchange="toggleGenreOnChange(this)" hidden>
+                    </div>
+
+                    <div>
+                      <button class='genre-btn' id='Adventure-btn' for='Adventure-cb' onclick="toggleGenre(this)">Adventure</button>
+                      <input type='checkbox' id='Adventure-cb' name='Adventure-cb' btn='Adventure-btn' onchange="toggleGenreOnChange(this)" hidden>
+                    </div>
+
+                    <div>
+                      <button class='genre-btn' id='Comedy-btn' for='Comedy-cb' onclick="toggleGenre(this)">Comedy</button>
+                      <input type='checkbox' id='Comedy-cb' name='Comedy-cb' btn='Comedy-btn' onchange="toggleGenreOnChange(this)" hidden>
+                    </div>
+
+                    <div>
+                      <button class='genre-btn' id='Drama-btn' for='Drama-cb' onclick="toggleGenre(this)">Drama</button>
+                      <input type='checkbox' id='Drama-cb' name='Drama-cb' btn='Drama-btn' onchange="toggleGenreOnChange(this)" hidden>
+                    </div>
+
+                    <div>
+                      <button class='genre-btn' id='Fantasy-btn' for='Fantasy-cb' onclick="toggleGenre(this)">Fantasy</button>
+                      <input type='checkbox' id='Fantasy-cb' name='Fantasy-cb' btn='Fantasy-btn' onchange="toggleGenreOnChange(this)" hidden>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class='main-content'>
+                <!-- row (title, sort button) -->
+                <!-- anime list -->
+            </div>
+        </div>
+
+    <script type="text/javascript" lang="javascript" src="main.js"></script>
+    </body>
+</html>
