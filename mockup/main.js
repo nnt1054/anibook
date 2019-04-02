@@ -23,6 +23,8 @@ function toggleGenreList() {
   lst.classList.toggle('show')
 }
 
+// title, countdown + next ep(/ep count), image, star, rating, genres
+
 var example = { 
       "mal_id":33352,
       "url":"https:\/\/myanimelist.net\/anime\/33352\/Violet_Evergarden",
