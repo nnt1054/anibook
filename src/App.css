@@ -1,4 +1,4 @@
-.App {
+/*.App {
   text-align: center;
 }
 
@@ -24,6 +24,232 @@
 }
 
 @keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}*/
+
+
+
+/* MAIN.CSS STARTS HERE */
+html, body {
+  width: 100vw;
+  font-family: 'Comfortaa';
+}
+
+body, div, h1, h2, li {
+  padding: 0px;
+  margin: 0px;
+}
+
+button {
+  background: white;
+  border: 1px solid rgb(0,0,0,0.6);
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.app {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.side-nav {
+  background: rgb(0,0,0,0);
+  width: 256px;
+  border-right: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-nav > * {
+  width: 128px;
+  padding: 6px;
+  margin: 8px auto;
+}
+
+.main-content {
+  background: rgb(0,0,0,0);
+  flex: 1;
+}
+
+.nav-logo-container {
+  width: 256px;
+  height: 256px;
+  margin: 0px;
+  padding: 0px;
+  border-bottom: 1px solid lightgray;
+  display: flex;
+}
+
+.nav-logo-image {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid black;
+  
+  margin: auto;
+  animation: logo-spin infinite 5s linear;
+}
+
+#search-textbox {
+  width: 114px;
+  margin: 12px auto;
+  border-radius: 12px;
+  border: 1px solid black;
+}
+
+.nav-btn {
+  border-radius: 12px;
+  border: 1px solid black;
+}
+
+#genre-title-container {
+  margin-bottom: 0px;
+}
+
+#genre-container {
+  padding-left: 48px;
+  padding-top: 0px;
+  margin-top: 0px;
+  display: none;
+}
+
+#genre-container.show {
+  display: flex;
+}
+
+#genre-container > * > button {
+  width: 102px;
+  height: 24px;
+  margin: 4px;
+  border-radius: 12px;
+}
+
+#toggleGenreBtn {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.genre-btn {
+  background: white;
+  border: 1px solid rgb(0,0,0,0.2);
+}
+
+.genre-btn.checked {
+  background: white;
+  border: 1px solid black;
+}
+
+
+#page-title-container {
+  width: 80%;
+  margin: 0px auto;
+  margin-top: 96px;
+}
+
+#page-title {
+  text-decoration: underline;
+}
+
+#sort-dropdown-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid black;
+  font-size: 14pt;
+}
+
+#anime-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: auto;
+}
+
+#anime-list > * {
+  margin: 24px 12px;
+}
+
+.show-container {
+  position: relative;
+  height: 315px;
+  width: 225px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.show-container:hover {
+  transition: 0.1s;
+  transform: scale(1.02);
+  box-shadow: 0px 0px 15px 2px rgb(0,0,0,0.2);
+}
+
+.show-image {
+  height: 315px;
+  width: 225px;
+  width: auto;
+  padding: 0px;
+  margin: auto;
+}
+
+.show-image-overlay {
+  height: 96px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  background: rgb(0,0,0,0.6);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.show-image-overlay > * {
+  /*margin: auto 0px;*/
+}
+
+.show-title {
+  padding: 8px 0px 0px 8px;
+  font-size: 12pt;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+.show-countdown {
+  padding: 12px 0px 0px 8px;
+  font-size: 10pt;
+  margin-bottom: 8px;
+}
+
+.save-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 14pt;
+}
+
+@keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
