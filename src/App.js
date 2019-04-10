@@ -39,7 +39,7 @@ class App extends Component {
 class SideNav extends Component {
 
     onToggleGenreBtn() {
-      alert('HEY LMAO');
+      alert('tester testing test :)');
     }
 
     render() {
@@ -132,5 +132,37 @@ class GenreContainer extends Component {
   }
 }
 
-export default App;
 
+class MainContent extends Component {
+    render() {
+        return (
+            React.createElement('div', {
+                className: 'main-content'
+            }, [
+                React.createElement('div', {
+                    id: 'page-title-container'            
+                }, [
+                    React.createElement('div', null, null),
+                    React.createElement('div', null, null),
+                    ]),
+                React.createElement('div', {
+                    className: 'anime-list'
+                }, [])
+            ])
+        )
+    }
+}
+
+class AnimeList extends Component {
+    render() {
+        return (
+            React.createElement('div', {
+                className: 'anime-list'
+            }, [
+                
+            ])
+        )
+    }
+} 
+
+export default App;
