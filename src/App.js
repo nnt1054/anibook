@@ -31,6 +31,7 @@ class App extends Component {
                 className: 'app'
             }, [
                 React.createElement(SideNav, null, null),
+                React.createElement(MainContent, null, null),
             ])
         )
     }
@@ -139,30 +140,86 @@ class MainContent extends Component {
             React.createElement('div', {
                 className: 'main-content'
             }, [
-                React.createElement('div', {
-                    id: 'page-title-container'            
-                }, [
-                    React.createElement('div', null, null),
-                    React.createElement('div', null, null),
-                    ]),
-                React.createElement('div', {
+                React.createElement(PageTitle, null, null),
+                React.createElement(AnimeList, {
                     className: 'anime-list'
-                }, [])
+                }, [
+                    React.createElement(Show),
+                ])
             ])
         )
     }
 }
 
 class AnimeList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            shows: data,
+        }
+        // this.shows = this.handleFilterTextChange.bind(this);
+        // this.handleInStockChange = this.handleInStockChange.bind(this);
+    }
+
+
     render() {
         return (
             React.createElement('div', {
-                className: 'anime-list'
+                id: 'anime-list'
             }, [
-                
+                React.createElement(Show),
+                React.createElement(Show),
+                React.createElement(Show),
+                React.createElement(Show),
+                React.createElement(Show),
+                React.createElement(Show),
             ])
         )
     }
-} 
+}
+
+class PageTitle extends Component {
+    render() {
+        return (
+            React.createElement('div', {
+                id: 'page-title-container',
+                className: 'row',
+            }, [
+                React.createElement('h1', {
+                    className: 'page-title',
+                }, 'Your List'),
+                React.createElement('button', {
+                    className: 'sort-dropdown-btn',
+                }, 'v'),
+            ])
+        )
+    }
+}
+
+class Show extends Component {
+    render() {
+        return (
+            React.createElement('div', {
+                className: 'show-container',
+            }, [
+              React.createElement('div', {
+                className: 'show-left',
+              }, [
+                  React.createElement('img', {
+                      className: 'show-image',
+                      src: 'https://cdn.myanimelist.net/images/anime/1795/95088.jpg?s=e2e6133e60a7f5351826fc9f72bdddb8'
+                  }),
+                  React.createElement('div', {
+                      className: 'show-image-overlay',
+                  }, [
+                      React.createElement('span', {className: 'show-title'}, 'Violet Evergarden'),
+                      React.createElement('span', {className: 'show-countdown'}, 'Ep. 02/24 airs in 10 hours')
+                  ]),
+                  React.createElement('button', {className: 'save-btn'}, '+')
+              ])
+            ])
+        )
+    }
+}
 
 export default App;
