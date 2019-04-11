@@ -124,36 +124,20 @@ button {
   text-align: center;
 }
 
-#genre-title-container {
-  margin-bottom: 0px;
+.genre-label {
+  text-decoration: underline;
 }
 
-#genre-container {
-  padding-left: 48px;
-  padding-top: 0px;
-  margin-top: 0px;
-  display: none;
+.genre-list {
+  padding-top: 8px;
+  padding-left: 22px;
 }
 
-#genre-container.show {
-  display: flex;
-}
-
-#genre-container > * > button {
+.genre-btn {
   width: 102px;
   height: 24px;
   margin: 4px;
   border-radius: 12px;
-}
-
-#toggleGenreBtn {
-  height: 24px;
-  width: 24px;
-  border-radius: 50%;
-  border: 1px solid black;
-}
-
-.genre-btn {
   background: white;
   border: 1px solid rgb(0,0,0,0.2);
 }

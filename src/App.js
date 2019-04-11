@@ -76,21 +76,25 @@ class SideNav extends Component {
               }, 'Popular'),
               // genre-title-container
               // <div id='genre-title-container' class="row"><span> Genres </span><button id='toggleGenreBtn' onclick='toggleGenreList()'>v</button></div>
-              React.createElement('div', {
-                id: 'genre-title-container',
-                className: 'row',
-              }, [
-                React.createElement('span', null, 'Genres'),
-                React.createElement('button', {
-                  id: 'toggleGenreBtn',
-                  onClick: this.onToggleGenreBtn,
-                }, 'v')
-                ]
-              ),
-              // genre-container (component)
               React.createElement(GenreContainer, {
+                id: 'genre-container',
                 genres: genres,
               }),
+              // React.createElement('div', {
+              //   id: 'genre-title-container',
+              //   className: 'row',
+              // }, [
+              //   React.createElement('span', null, 'Genres'),
+              //   React.createElement('button', {
+              //     id: 'toggleGenreBtn',
+              //     onClick: this.onToggleGenreBtn,
+              //   }, 'v')
+              //   ]
+              // ),
+              // // genre-container (component)
+              // React.createElement(GenreContainer, {
+              //   genres: genres,
+              // }),
             ])
         )
     }
@@ -113,23 +117,43 @@ class SearchTextBox extends Component {
 class GenreContainer extends Component {
   constructor(props) {
     super(props)
+    var genres = {};
+    props.genres.forEach(
+        x => {
+          genres[x] = 0;
+        }
+    )
+    
     this.state = {
-      genres: props.genres,
+      genres: genres,
     }
   }
   
   render() {
-    const genreButtons = this.state.genres.map(genre =>
-        React.createElement('span', null, genre)
-      )
-    // this.items = this.state.cart.map((item, key) =>
-    //   <li key={item.id}>{item.name}</li>
-    // );
+    const genreButtons = Object.entries(this.state.genres).map(e => {
+        console.log(e[0]);
+        return React.createElement('button', {
+          className: 'genre-btn',
+        }, e[0])
+    });
+    // const genreButtons = this.state.genres.map((v, k) => {
+    //     React.createElement('span', {
+    //       className: 'genre-btn',
+    //     }, k) 
+    // })
 
-    return React.createElement('div', {
-      // id: 'genre-container',
-      className: 'column'
-    }, genreButtons)
+    return (
+        React.createElement('div', {
+            key: 'genre-container',
+            className: 'column',
+        }, [
+            React.createElement('span', {className: 'genre-label'}, 'Genres'),
+            React.createElement('div', {
+                key: 'genre-list',
+                className: 'genre-list column',
+            }, genreButtons)  
+        ])
+    )
   }
 }
 
