@@ -2,132 +2,31 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import data from './winter-2018.json';
+// const pages = ['search', 'favorites', 'season', 'popular']
 
 
 class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            value: 1,
-        }
-    }
 
-    componentDidMount() {
-        // fetch(API_URL)
-        //     .then(resp => resp.json())
-        //     .then(data => 
-        //         this.setState({
-        //             value: data.value,
-        //         }))
-        this.setState({
-            value: this.state.value + 1,
-        })
-    }
-
-    render() {
-        return (
-            React.createElement('div', {
-                className: 'app'
-            }, [
-                React.createElement(SideNav, null, null),
-                React.createElement(MainContent, null, null),
-            ])
-        )
-    }
-}
-
-class SideNav extends Component {
-
-    onToggleGenreBtn() {
-      alert('tester testing test :)');
-    }
-
-    render() {
-        const genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy']
-        return (
-            React.createElement('div', {
-              className: 'side-nav',
-            }, [
-              // logo-container-container
-              React.createElement('div', {
-                className: 'nav-logo-container'
-              }, [
-                React.createElement('img', {
-                  className: 'nav-logo-image',
-                  src: logo,
-                })]),
-              // search-textbox (component)
-              React.createElement(SearchTextBox),
-              // your-list-btn
-              React.createElement('button', {
-                id: 'your-list-btn',
-                className: 'nav-btn',
-              }, 'Your List'),
-              // season-btn
-              React.createElement('button', {
-                id: 'season-btn',
-                className: 'nav-btn',
-              }, 'By Season'),
-              // popular-btn
-              React.createElement('button', {
-                id: 'popular-btn',
-                className: 'nav-btn',
-              }, 'Popular'),
-              // genre-title-container
-              // <div id='genre-title-container' class="row"><span> Genres </span><button id='toggleGenreBtn' onclick='toggleGenreList()'>v</button></div>
-              React.createElement(GenreContainer, {
-                id: 'genre-container',
-                genres: genres,
-              }),
-              // React.createElement('div', {
-              //   id: 'genre-title-container',
-              //   className: 'row',
-              // }, [
-              //   React.createElement('span', null, 'Genres'),
-              //   React.createElement('button', {
-              //     id: 'toggleGenreBtn',
-              //     onClick: this.onToggleGenreBtn,
-              //   }, 'v')
-              //   ]
-              // ),
-              // // genre-container (component)
-              // React.createElement(GenreContainer, {
-              //   genres: genres,
-              // }),
-            ])
-        )
-    }
-}
-
-class SearchTextBox extends Component {
-  render() {
-    return (
-      // <input id="search-textbox" type="text" name="location" placeholder="Search..." value="">
-      React.createElement('input', {
-        id: 'search-textbox', 
-        type: 'text',
-        name: 'location',
-        placeholder: 'Search...',
-      }, null)
-    )
-  }
-}
-
-class GenreContainer extends Component {
-    constructor(props) {
-        super(props)
-        var genres = {};
-        props.genres.forEach(
+        // pull genres from API later!!!
+        const genreLabels = ['Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Romance']
+        const genres = {};
+        genreLabels.forEach(
             x => {
               genres[x] = false;
             }
         )
-        
+
         this.state = {
-          genres: genres,
+            genres: genres,
+            page: 'favorites',
+            filterText: '',
         }
+
         this.toggleGenre = this.toggleGenre.bind(this);
+        this.changePage = this.changePage.bind(this);
     }
 
     toggleGenre(genre) {
@@ -135,12 +34,110 @@ class GenreContainer extends Component {
         this.forceUpdate();
     }
 
+    changePage(pageName) {
+        this.setState({page: pageName});
+    }
+
     render() {
-        const genreButtons = Object.entries(this.state.genres).map(e => {
+        const props = {
+            genres: this.state.genres,
+            page: this.state.page,
+            filterText: '',
+            toggleGenre: this.toggleGenre,
+            changePage: this.changePage,
+        }
+      
+        return (
+            React.createElement('div', {
+                className: 'app'
+            }, [
+                React.createElement(SideNav, Object.assign({}, props, {
+                  key: 0
+                }), null),
+                React.createElement(MainContent, Object.assign({}, props, {
+                  key: 1
+                })),
+            ])
+        )
+    }
+}
+
+class SideNav extends Component {
+
+
+    render() {
+
+        return (
+            React.createElement('div', {
+                className: 'side-nav',
+            }, [
+                React.createElement('div', {
+                className: 'nav-logo-container'
+                }, [
+                    React.createElement('img', {
+                        className: 'nav-logo-image',
+                        src: logo,
+                    })]),
+
+                React.createElement(SearchTextBox, {
+                    active: (this.props.page === 'search') ? true : false,
+                    onClick: () => this.props.changePage('search'),
+                }),
+                React.createElement('button', {
+                    id: 'favorites',
+                    className: (this.props.page === 'favorites') ? 'nav-btn-active' : 'nav-btn',
+                    onClick: () => this.props.changePage('favorites'),
+                  }, 'Favorites'),
+                React.createElement('button', {
+                    id: 'season-btn',
+                    className: (this.props.page === 'season') ? 'nav-btn-active' : 'nav-btn',
+                    onClick: () => this.props.changePage('season'),
+                }, 'By Season'),
+                React.createElement('button', {
+                    id: 'popular-btn',
+                    className: (this.props.page === 'popular') ? 'nav-btn-active' : 'nav-btn',
+                    onClick: () => this.props.changePage('popular'),
+                }, 'Popular'),
+                React.createElement(GenreContainer, {
+                    id: 'genre-container',
+                    genres: this.props.genres,
+                    toggleGenre: this.props.toggleGenre,
+                }),
+            ])
+        )
+    }
+}
+
+class SearchTextBox extends Component {
+  
+  testFunction(e) {
+      if (e.key === 'Enter') {
+          console.log(e.target.value);
+          alert('SUBMITTED');
+      }
+  }
+  
+  render() {
+    return (
+      React.createElement('input', {
+        id: 'search-textbox', 
+        type: 'text',
+        name: 'location',
+        placeholder: 'Search...',
+        onKeyDown: this.testFunction,
+      }, null)
+    )
+  }
+}
+
+class GenreContainer extends Component {
+
+    render() {
+        const genreButtons = Object.entries(this.props.genres).map(e => {
             return React.createElement(GenreButton, {
                 genre: e[0],
                 active: e[1],
-                toggleGenre: this.toggleGenre,
+                toggleGenre: this.props.toggleGenre,
             })
         });
 
