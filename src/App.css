@@ -165,6 +165,7 @@ button {
   width: 80%;
   margin: 0px auto;
   margin-top: 96px;
+  margin-left: 64px;
 }
 
 #page-title {
@@ -179,15 +180,26 @@ button {
   font-size: 14pt;
 }
 
-#anime-list {
+.day-container {
+  width: 80%;
+  margin: 32px 52px;
+}
+
+.day-label {
+  text-decoration: underline;
+  font-weight: bold;
+  margin: 12px;
+}
+
+.anime-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 80%;
   margin: auto;
+  margin-left: 0px;
 }
 
-#anime-list > * {
+.anime-list > * {
   margin: 24px 12px;
 }
 
@@ -201,20 +213,20 @@ button {
 
 .show-container:hover {
   transition: 0.1s;
-  transform: scale(1.02);
+  transform: scale(1.03);
   box-shadow: 0px 0px 15px 2px rgb(0,0,0,0.2);
 }
 
 .show-image {
-  height: 315px;
-  width: 225px;
+  min-height: 315px;
+  min-width: 225px;
   width: auto;
   padding: 0px;
   margin: auto;
 }
 
 .show-image-overlay {
-  height: 96px;
+  height: 64px;
   width: 100%;
   position: absolute;
   bottom: 0px;
@@ -222,11 +234,15 @@ button {
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  overflow-y: hidden;
+  transition: 0.2s; 
 }
 
-.show-image-overlay > * {
-  /*margin: auto 0px;*/
+.show-image-overlay:hover {
+  transition: 0.4s;
+  overflow-y: scroll;
+  height: 100%;
+  background: rgb(0,0,0,0.9);
 }
 
 .show-title {
@@ -234,19 +250,43 @@ button {
   font-size: 12pt;
   font-weight: bold;
   margin-top: 4px;
+  cursor: pointer;
 }
 
+.show-title:hover {
+  text-decoration: underline;
+}
+
+
 .show-countdown {
-  padding: 12px 0px 0px 8px;
-  font-size: 10pt;
-  margin-bottom: 8px;
+  padding: 12px 0px 12px 8px;
+  font-size: 9pt;
+  margin-top: 22px;
 }
 
 .save-btn {
+  transform: scale(2);
   position: absolute;
-  top: 6px;
-  right: 6px;
-  font-size: 14pt;
+  top: 16px;
+  right: 16px;
+  color: white;
+  display: none;
+}
+
+.save-btn:hover {
+  transition: 0.1s;
+  transform: scale(2.2);
+  color: yellow;
+  cursor: pointer;
+}
+
+.save-btn-checked {
+  color: yellow;
+  display: block;
+}
+
+.show-left:hover > .save-btn {
+  display: block;
 }
 
 @keyframes logo-spin {
