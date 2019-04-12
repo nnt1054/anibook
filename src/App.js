@@ -9,7 +9,7 @@ class App extends Component {
         super(props);
 
         if (localStorage.getItem('favorites') === null) {
-            localStorage.setItem('favorites', JSON.stringify([38003, 8687]));
+            localStorage.setItem('favorites', JSON.stringify([]));
         }
 
         // pull genres from API later!!!
@@ -48,7 +48,6 @@ class App extends Component {
     }
 
     componentDidMount() {
-        console.log('fetching :)');
         var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
             targetUrl = 'https://api.jikan.moe/v3/schedule/'
         fetch(proxyUrl + targetUrl)
@@ -349,7 +348,6 @@ class Show extends Component {
                 return id !== this.props.show.mal_id;
             })
         }
-        console.log(favorites);
 
         localStorage.setItem('favorites', JSON.stringify(favorites));
 
