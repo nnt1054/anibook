@@ -115,48 +115,60 @@ class SearchTextBox extends Component {
 }
 
 class GenreContainer extends Component {
-  constructor(props) {
-    super(props)
-    var genres = {};
-    props.genres.forEach(
-        x => {
-          genres[x] = 0;
+    constructor(props) {
+        super(props)
+        var genres = {};
+        props.genres.forEach(
+            x => {
+              genres[x] = false;
+            }
+        )
+        
+        this.state = {
+          genres: genres,
         }
-    )
-    
-    this.state = {
-      genres: genres,
+        this.toggleGenre = this.toggleGenre.bind(this);
     }
-  }
-  
-  render() {
-    const genreButtons = Object.entries(this.state.genres).map(e => {
-        console.log(e[0]);
-        return React.createElement('button', {
-          className: 'genre-btn',
-        }, e[0])
-    });
-    // const genreButtons = this.state.genres.map((v, k) => {
-    //     React.createElement('span', {
-    //       className: 'genre-btn',
-    //     }, k) 
-    // })
 
-    return (
-        React.createElement('div', {
-            key: 'genre-container',
-            className: 'column',
-        }, [
-            React.createElement('span', {className: 'genre-label'}, 'Genres'),
+    toggleGenre(genre) {
+        this.state.genres[genre] = (this.state.genres[genre]) ? false : true;
+        this.forceUpdate();
+    }
+
+    render() {
+        const genreButtons = Object.entries(this.state.genres).map(e => {
+            return React.createElement(GenreButton, {
+                genre: e[0],
+                active: e[1],
+                toggleGenre: this.toggleGenre,
+            })
+        });
+
+        return (
             React.createElement('div', {
-                key: 'genre-list',
-                className: 'genre-list column',
-            }, genreButtons)  
-        ])
-    )
+                key: 'genre-container',
+                className: 'column',
+            }, [
+                React.createElement('span', {className: 'genre-label'}, 'Genres'),
+                React.createElement('div', {
+                    key: 'genre-list',
+                    className: 'genre-list column',
+                }, genreButtons)
+            ])
+        )
   }
 }
 
+class GenreButton extends Component {
+    render() {
+        return (
+            React.createElement('button', {
+                className: (this.props.active) ? 'genre-btn-active' : 'genre-btn',
+                onClick: () => this.props.toggleGenre(this.props.genre),
+            }, this.props.genre)
+        )
+    }
+}
 
 class MainContent extends Component {
     render() {

@@ -142,7 +142,11 @@ button {
   border: 1px solid rgb(0,0,0,0.2);
 }
 
-.genre-btn.checked {
+.genre-btn-active {
+  width: 102px;
+  height: 24px;
+  margin: 4px;
+  border-radius: 12px;
   background: white;
   border: 1px solid black;
 }
