@@ -297,3 +297,36 @@ button {
     transform: rotate(360deg);
   }
 }
+
+
+.nav-toggle {
+  position: fixed;
+  top: 12px;
+  right: 16px;
+  font-size: 18pt;
+  cursor: pointer;
+  display: none;
+}
+
+@media (max-width: 700px) {
+
+    .nav-toggle {
+        display: block;
+    }
+
+    .side-nav {
+        /*display: none;*/
+        position: fixed;
+        min-height: 110vh;
+        overflow: scroll;
+        background: white;
+        z-index: 10;
+        left: -256px;
+        transition: 0.2s;
+    }
+
+    .side-nav.show {
+        left: 0px;
+    }
+
+}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import schedule from './schedule.json';
+import $ from 'jquery'; 
 
 class App extends Component {
 
@@ -12,7 +13,6 @@ class App extends Component {
             localStorage.setItem('favorites', JSON.stringify([]));
         }
 
-        // pull genres from API later!!!
         const genreLabels = ['Action', 'Adventure', 'Comedy', 'Drama', 'Ecchi', 'Fantasy', 'Mystery', 'Sci-Fi', 'Slice of Life']
         const genres = {};
         genreLabels.forEach(
@@ -21,13 +21,16 @@ class App extends Component {
             }
         )
 
-        // var scheduleList = [schedule.sunday, schedule.monday, schedule.tuesday, schedule.wednesday,
-        //         schedule.thursday, schedule.friday, schedule.saturday]
         var dayList = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
         var dayDict = {};
-        dayList.forEach(x => {
-            dayDict[x] = [];
-        })
+        if (localStorage.getItem('shows') != null) {
+            dayDict = JSON.parse(localStorage.getItem('shows'));
+        } else {
+            dayList.forEach(x => {
+                dayDict[x] = [];
+            })
+        }
+
         var d = new Date();
         var n = d.getDay();
         for (var i = 0; i < n; i++) {
@@ -52,7 +55,10 @@ class App extends Component {
             targetUrl = 'https://api.jikan.moe/v3/schedule/'
         fetch(proxyUrl + targetUrl)
             .then(response => response.json())
-            .then(data => this.setState({ shows: data }));
+            .then( data => {
+                this.setState({ shows: data });
+                localStorage.setItem('shows', JSON.stringify(data));
+            });
     }
 
     toggleGenre(genre) {
@@ -73,6 +79,10 @@ class App extends Component {
         }
     }
 
+    toggleSide() {
+        $('.side-nav').toggleClass('show');
+    }
+
     render() {
         const props = {
             genres: this.state.genres,
@@ -87,6 +97,10 @@ class App extends Component {
             React.createElement('div', {
                 className: 'app'
             }, [
+                React.createElement('span', {
+                    className: 'nav-toggle',
+                    onClick: this.toggleSide,
+                }, 'Menu'),
                 React.createElement(SideNav, Object.assign({}, props, {
                   key: 0
                 }), null),
@@ -223,7 +237,7 @@ class MainContent extends Component {
         if (genres.length > 0) {
             var result = genres.map(f => {
                 return show.genres.map(g => {
-                    return (g.name == f)          
+                    return (g.name === f)          
                 }).includes(true);
             })
             return result.every((x) => x);
